@@ -1,24 +1,29 @@
 const express = require('express')
+var exphbs = require("express-handlebars");
 const path = require('path')
 
 const app = new express()
 
 const PORT = 4000;
 
+// Set Handlebars as the default templating engine.
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 //Express will expect all static assets to be in public
 app.use(express.static('public'))
 
 app.get('/', (req, res) =>{
-    res.sendFile(path.resolve(__dirname, 'pages/index.html'))
+   res.render('index')
 })
 app.get('/about', (req,res)=>{
-    res.sendFile(path.resolve(__dirname, 'pages/about.html'))
+    res.render('about')
 })
-app.get('/about', (req,res)=>{
-    res.sendFile(path.resolve(__dirname, 'pages/contact.html'))
+app.get('/post', (req,res)=>{
+    res.render('post')
 })
-app.get('/about', (req,res)=>{
-    res.sendFile(path.resolve(__dirname, 'pages/post.html'))
+app.get('/contact', (req,res)=>{
+    res.render('contact')
 })
 app.listen(PORT, ()=> {
     console.log("Listening on PORT: " + PORT)
