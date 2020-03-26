@@ -1,5 +1,5 @@
 const express = require('express')
-var exphbs = require("express-handlebars");
+var exphbs = require("express-handlebars")
 const path = require('path')
 
 const app = new express()
@@ -25,6 +25,10 @@ app.get('/post', (req,res)=>{
 app.get('/contact', (req,res)=>{
     res.render('contact')
 })
+app.get('/posts/new', (req, res)=>{
+    res.render('create')
+})
+
 app.listen(PORT, ()=> {
     console.log("Listening on PORT: " + PORT)
 })
