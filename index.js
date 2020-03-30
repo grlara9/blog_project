@@ -4,6 +4,7 @@ const path = require('path')
 const bodyParser= require('body-parser')
 const mongoose = require('mongoose')
 const app = express()
+const fileUpload = require('express-fileupload')
 
 const PORT = 4000;
 
@@ -17,6 +18,8 @@ app.set("view engine", "handlebars");
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true} ))
+
+app.use(fileUpload())
 
 //Express will expect all static assets to be in public
 app.use(express.static('public'))
@@ -43,8 +46,12 @@ app.get('/posts/new', (req, res)=>{
 })
 app.post('/posts/store', (req, res)=>{
     console.log(req.body)
-    BlogPost.create(req.body, (error, blogpost) => {
-    res.redirect('/')
+    let image = req.files.image;
+    image.mv(path.resolve(__dirname, 'public/img', image.name),async (error)=>{
+
+        BlogPost.create(req.body, (error, blogpost) => {
+            res.redirect('/')
+    })
     })
 })
 app.listen(PORT, ()=> {
