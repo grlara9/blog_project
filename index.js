@@ -3,7 +3,7 @@ var exphbs = require("express-handlebars")
 const path = require('path')
 const bodyParser= require('body-parser')
 const mongoose = require('mongoose')
-const app = new express()
+const app = express()
 
 const PORT = 4000;
 
@@ -21,16 +21,19 @@ app.use(bodyParser.urlencoded({extended: true} ))
 //Express will expect all static assets to be in public
 app.use(express.static('public'))
 
-app.get('/', (req, res) =>{
-    const blogposts = BlogPost.find({})
+app.get('/', async (req, res) =>{
+    const blogposts = await BlogPost.find({})
     console.log("this is the result:" + blogposts)
-   res.render('index', {blogposts: blogposts})
+   res.render('index', {blogposts})
 })
 app.get('/about', (req,res)=>{
     res.render('about')
 })
-app.get('/post', (req,res)=>{
-    res.render('post')
+app.get('/post/:id', (req,res)=>{
+    const blogpost = BlogPost.findById(req.params.id)
+    res.render('post', {
+        blogpost
+    })
 })
 app.get('/contact', (req,res)=>{
     res.render('contact')
