@@ -13,8 +13,8 @@ const BlogPost = require('./models/BlogPost')
 mongoose.connect("mongodb://localhost/my_database", { useNewUrlParser: true })
 
 // Set Handlebars as the default templating engine.
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true} ))
@@ -32,6 +32,9 @@ app.get('/', async (req, res) =>{
 app.get('/about', (req,res)=>{
     res.render('about')
 })
+app.get('/post', (req, res)=>{
+    res.render('post')
+})
 app.get('/post/:id', (req,res)=>{
     const blogpost = BlogPost.findById(req.params.id)
     res.render('post', {
@@ -45,15 +48,18 @@ app.get('/posts/new', (req, res)=>{
     res.render('create')
 })
 app.post('/posts/store', (req, res)=>{
-    console.log(req.body)
+
     let image = req.files.image;
     image.mv(path.resolve(__dirname, 'public/img', image.name),async (error)=>{
 
-        BlogPost.create(req.body, (error, blogpost) => {
-            res.redirect('/')
+        BlogPost.create({
+            ...req.body, 
+            image: '/img/'+ image.name
+        })
+                   res.redirect('/')
     })
     })
-})
+
 app.listen(PORT, ()=> {
     console.log("Listening on PORT: " + PORT)
 })
