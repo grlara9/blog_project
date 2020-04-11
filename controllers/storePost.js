@@ -1,17 +1,28 @@
-const BlogPost = require('../models/BlogPost')
-const path = require('path')
+var express = require("express")
+var router = express.Router()
+var BlogPost = require('../models/BlogPost')
+//const path = require('path')
 
-module.exports = (req, res)=>{
+router.post("/create",(req, res)=>{
 
-    let image = req.files.image;
+    //let image = req.files.image;
 
-    image.mv(path.resolve(__dirname, '..','public/img', image.name), async (error)=> 
-    {
+    //image.mv(path.resolve(__dirname, '..','public/img', image.name), async (error)=> 
+    //{
 
-        await BlogPost.create({
-            ...req.body, 
-            image: '/img/'+ image.name
+        BlogPost.create({
+            title:req.body.title,
+            body:req.body.title, 
+            //image: '/img/'+ image.name
+        }).then(blog => {
+            console.log(blog)
+            console.log("success")
+            res.redirect('/')
+
         })
-                   res.redirect('/')
-    })
-    }
+        .catch(err=> console.log(err))
+        })
+    //})
+
+    module.exports = router
+    
