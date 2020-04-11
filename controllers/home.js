@@ -1,8 +1,10 @@
 const BlogPost = require('../models/BlogPost')
 
-module.exports=  async (req, res) =>{
-    const blogposts = await BlogPost.find({})
-    res.render('index', {
-        blogposts
-    })
+module.exports= (req, res) =>{
+    const blogposts = BlogPost.find()
+    console.log(blogposts)
+    var df = {ics: blogposts}
+
+    res.render("index", df)
 }
+
