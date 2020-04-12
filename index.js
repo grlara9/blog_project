@@ -31,15 +31,16 @@ connection.once('open', ()=>{
 
 
 //const newPostController = require('./controllers/newPost')
-const homeController = require('./controllers/home')
-const storePostController = require('./controllers/storePost')
+//const homeController = require('./controllers/home')
+//const storePostController = require('./controllers/storePost')
 //const getPostController = require('./controllers/getPost')
+const blogController = require('./controllers/blog')
 
-
-app.use(homeController)
+app.use('/blog', blogController)
+//app.use(homeController)
 //app.get('/posts/new', newPostController)
 //app.get('/post/:id', getPostController)
-app.use("post", storePostController)
+//app.use("post", storePostController)
 
 app.listen(PORT, ()=> {
     console.log("Listening on PORT: " + PORT)

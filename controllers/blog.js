@@ -1,3 +1,12 @@
 var express = require("express")
 var router = express.Router()
-const BlogPost = require('../models/BlogPost')
+var BlogPost = require('./models/BlogPost')
+
+router.get("/", (req, res) => {
+    BlogPost.find({})
+    .then(response =>{})
+    .catch(err => console.log(err))
+})
+
+
+module.exports = router
