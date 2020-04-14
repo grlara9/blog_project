@@ -4,26 +4,28 @@ const Schema = mongoose.Schema;
 
 const BlogPostSchema = new Schema({
     
-    title: { 
+    title:{ 
         type: String,
-        required: true
+        trim: true, 
+        index: true, 
+        
     },
-    body: {
+    body:{
         type: String,
-        required: true
+       
     },
-    username: {
+    username:{
         type: String,
     },
-    datedPosted: {
+    datedPosted:{
         type: Date,
         default: new Date()
     },
-    image: {
+    image:{
         type: String,
     }
 }) ;
 
 const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
 
-module.exports = BlogPost
+module.exports = BlogPost;
