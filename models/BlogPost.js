@@ -1,31 +1,13 @@
 const mongoose = require("mongoose")
-
 const Schema = mongoose.Schema;
 
 const BlogPostSchema = new Schema({
-    
-    title:{ 
-        type: String,
-        trim: true, 
-        index: true, 
-        
-    },
-    body:{
-        type: String,
-       
-    },
-    username:{
-        type: String,
-    },
-    datedPosted:{
-        type: Date,
-        default: new Date()
-    },
-    image:{
-        type: String,
-    }
-}) ;
+    title:{ type: String, trim: true},
+    body:{type: String},
+    date:{type: Date},
+    },{
+        timestamps: true,
+    }) ;
 
 const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
-
 module.exports = BlogPost;

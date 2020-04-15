@@ -12,12 +12,12 @@ router.post("/add", (req, res)=>{
     //let image = req.files.image;
     //image.mv(path.resolve(__dirname, '..','public/img', image.name), async (error)=> 
     //{
-    const title=req.body.title;
-    const body=req.body.body;
+    const {title, body} = req.body;
+
     console.log("value for title and body is: " + title + body)
     const newBlog = new BlogPost({
         title,
-        body,
+        body
         //image: '/img/'+ image.name
         });
         
