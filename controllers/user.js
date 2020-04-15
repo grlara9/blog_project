@@ -17,3 +17,4 @@ router.post("add", (req, res)=>{
     .then(()=> res.json("User Added!"))
     .catch(err => res.status(400).json("Error: " + err));
 })
+module.exports = router

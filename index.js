@@ -32,8 +32,10 @@ connection.once('open', ()=>{
 //const storePostController = require('./controllers/storePost')
 //const getPostController = require('./controllers/getPost')
 const blogController = require('./controllers/blog')
+const userController = require('./controllers/user')
 
 app.use('/blog', blogController)
+app.use('/user', userController)
 //app.use(homeController)
 //app.get('/posts/new', newPostController)
 //app.get('/post/:id', getPostController)
