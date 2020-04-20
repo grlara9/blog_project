@@ -3,8 +3,9 @@ const Schema = mongoose.Schema;
 
 const BlogPostSchema = new Schema({
     title:{ type: String, trim: true},
-    body:{type: String},
-    date:{type: Date},
+    blog:{type: String},
+    username:{type:String},
+    date:{type: Date, default: Date.now}
     },{
         timestamps: true,
     }) ;

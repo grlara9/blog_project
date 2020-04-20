@@ -2,7 +2,8 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
 
 const UserPostSchema = new Schema({
-    username:{ type: String, trim: true, unique: true, minlength: 3},
+        username:{ type: String, trim: true, unique: true, minlength: 3},
+        
     },{
         timestamps: true,
     }) ;

@@ -8,13 +8,16 @@ router.get("/", (req, res) =>{
     .catch(err => res.status(400).json("Error:" + err));
 })
 
-router.post("add", (req, res)=>{
+router.route("/add").post((req, res)=>{
     const username = req.body.username;
     
-    const newUser = new UserPost({username});
-
+    const newUser = new UserPost({
+        username
+    }); 
     newUser.save()
     .then(()=> res.json("User Added!"))
     .catch(err => res.status(400).json("Error: " + err));
 })
+
+
 module.exports = router

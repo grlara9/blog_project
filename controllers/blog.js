@@ -9,16 +9,17 @@ router.get("/", (req, res) => {
 })
 
 router.post("/add", (req, res)=>{
-    //let image = req.files.image;
-    //image.mv(path.resolve(__dirname, '..','public/img', image.name), async (error)=> 
-    //{
-    const {title, body} = req.body;
+    
+    const title= req.body.title;
+    const blog=req.body.blog;
+    const username = req.body.username;
+    const date = Date.parse(req.body.date)
 
-    console.log("value for title and body is: " + title + body)
     const newBlog = new BlogPost({
         title,
-        body
-        //image: '/img/'+ image.name
+        blog,
+        username,
+        date
         });
         
         newBlog.save()
@@ -26,6 +27,11 @@ router.post("/add", (req, res)=>{
         .catch(err=> res.status(400).json("Error: " + err))
     });
 
+    router.delete("/:id", (req, res)=>{
+        BlogPost.findByIdAndDelete(req.params.id)
+        .then(()=>res.json("Blog deleted!"))
+        .catch(err=>res.status(400).json("Error: " + err));
+    })
 
 
 module.exports = router
