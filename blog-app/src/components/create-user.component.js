@@ -8,5 +8,5 @@ class CreateUser extends Component {
             </div>
         )
     }
-}
+} 
 export default CreateUser
