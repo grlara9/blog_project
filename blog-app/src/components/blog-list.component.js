@@ -7,7 +7,7 @@ const Blog = props =>(
   <h2 className="blog-post-title">{props.blog.title}</h2>
   <p className="blog-post-meta">{props.blog.date} by <a href="#">Mark</a></p>
   <p>{props.blog.blog}</p>
-  <a href="#" onClick={() => { props.deleteBlog(props.blog._id) }}>delete</a>
+  <a href="/" onClick={() => { props.deleteBlog(props.blog._id) }}>delete</a>
   </div>
 )
 
@@ -34,11 +34,11 @@ class BlogList extends React.Component {
   }
 
   deleteBlog = (id) => {
-    axios.delete('http://localhost:5000/blog/' + id)
+    axios.delete('http://localhost:5000/blog/'+id)
     .then(promise => console.log(promise));
 
     this.setState({
-      blogs: this.state.blogs.filter(blog=> blog._id ===! id)
+      blogs: this.state.blogs.filter(blog => blog._id ==! id)
     })
   }
 
@@ -51,9 +51,11 @@ class BlogList extends React.Component {
   
   render() {
         return (
-        <div>
-        {this.blogsLists()}
-        </div>
+    <React.Fragment>
+
+      {this.blogsLists()}
+    </React.Fragment>
+       
        
          )
     }
