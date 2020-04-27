@@ -16,7 +16,7 @@ function App() {
         <Route path="/" exact component={BlogList} />
         <Route path="/blog" component={CreateBlog} />
         <Route path="/user" component={CreateUser} />
-        </div>
+        </div> 
     </Router>
   );
 }

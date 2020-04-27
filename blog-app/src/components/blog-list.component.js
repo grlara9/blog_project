@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-//import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-const Blog = props =>{
-  
-}
+
+const Blog = props =>(
+  <div className="blog-post">
+  <h2 className="blog-post-title">{props.blog.title}</h2>
+  <p className="blog-post-meta">{props.blog.date} by <a href="#">Mark</a></p>
+  <p>{props.blog.blog}</p>
+  <a href="#" onClick={() => { props.deleteBlog(props.blog._id) }}>delete</a>
+  </div>
+)
 
 class BlogList extends React.Component {
   constructor(props){
@@ -33,20 +38,23 @@ class BlogList extends React.Component {
     .then(promise => console.log(promise));
 
     this.setState({
-      blogs: this.state.blogs.filter(blog=> blog._id ==! id)
+      blogs: this.state.blogs.filter(blog=> blog._id ===! id)
     })
   }
 
-  blogsLists =()=> {
+  blogsLists = () => {
     return this.state.blogs.map(blogg => {
       return <Blog blog={blogg} deleteBlog={this.deleteBlog} key={blogg._id} />
-    })
-  }
+    }
+      )}
     
   
   render() {
         return (
+        <div>
         {this.blogsLists()}
+        </div>
+       
          )
     }
 }

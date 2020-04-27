@@ -14,13 +14,16 @@ app.use(express.json());
 //Express will expect all static assets to be in public
 app.use(express.static('public'))
 
-
+ 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
+mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
+
 const connection = mongoose.connection;
 connection.once('open', ()=>{
     console.log("MongoDB database connection established successfully")
 })
+
+ 
 const blogController = require('./controllers/blog')
 const userController = require('./controllers/user')
 
