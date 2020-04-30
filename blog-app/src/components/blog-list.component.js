@@ -5,9 +5,10 @@ import axios from 'axios';
 const Blog = props =>(
   <div className="blog-post">
   <h2 className="blog-post-title">{props.blog.title}</h2>
-  <p className="blog-post-meta">{props.blog.date} by <a href="#">Mark</a></p>
+<p className="blog-post-meta">{props.blog.date} by <a href="#">{props.blog.username}</a></p>
   <p>{props.blog.blog}</p>
-  <a href="/" onClick={() => { props.deleteBlog(props.blog._id) }}>delete</a>
+  <a href="/"><button onClick={() => { props.deleteBlog(props.blog._id) }}>delete</button></a>
+
   </div>
 )
 

@@ -17,7 +17,7 @@ constructor(props){
 }
 
 componentDidMount() {
-  axios.get('http://localhost:5000/blog/')
+  axios.get('http://localhost:5000/user/')
   .then(response => {
     console.log("this is response: " + response)
     if( response.data.length > 0){
@@ -36,6 +36,13 @@ componentDidMount() {
         [name]: value
       });
     }
+
+    onChangeUsername =(e)=> {
+      this.setState({
+        username: e.target.value
+      })
+    }
+  
          
   onChangeDate =(date)=> {
   this.setState({
@@ -49,11 +56,11 @@ componentDidMount() {
           title: this.state.title,
           blog: this.state.blog,
           username: this.state.username,
-          date: this.state.date,
+          date: this.state.date
         };
           
       
-        console.log(blog);
+        console.log("Data sent was: " + blog);
         
         axios.post('http://localhost:5000/blog/add', blog)
           .then(res => console.log(res.data));
@@ -64,55 +71,56 @@ componentDidMount() {
 
 render() {
   return (
-    <Form onClick={this.onSubmit}>
-      <Form.Group>
-        <Form.Label>Title</Form.Label>
-          <Form.Control 
-            type="text" 
-            name="title" 
-            value={this.state.title}
-            onChange={this.handleInputChange}
-            />
-          </Form.Group>
-         
-      <Form.Group >
-      <Form.Label>Username</Form.Label>
-      <Form.Control as="select" ref="userInput" required 
-        value={this.state.username}
-        onChange={this.handleInputChange}
-      >
-        {
-          this.state.users.map((user) =>{
-            return <option key={user} value={user}>{user}</option>
+    <form onClick={this.onSubmit}>
+
+      <div className="form-group">
+        <label>Title: </label> 
+      <input type="text" 
+      name="title" 
+      value={this.state.title}
+      onChange={this.handleInputChange}/>
+      </div>
+
+      <div className="form-group">
+
+<label>Blog: </label>
+  <textarea type="text" className="form-control" name="blog" value={this.state.blog} onChange={this.handleInputChange} />
+
+</div>
+
+<div className="form-group">
+
+    <label>
+          Choose username:
+          </label>
+          <select ref="userInput" required className="form-control" value={this.state.username} 
+          onChange={this.onChangeUsername}>
+          {
+            this.state.users.map(user =>{
+              return <option key={user} value={user}>
+              {user}
+            </option>
           })
         }
-       
-      </Form.Control>
-    </Form.Group>
+        </select>
+        </div>
 
 
-          <Form.Group>
-            <Form.Label>Blog</Form.Label>
-            <Form.Control as="textarea" rows="3" 
-            name="blog" 
-            value={this.state.blog}
-            onChange={this.handleInputChange}
-             />
-          </Form.Group>
 
-          <Form.Group>
-            <Form.Label>Date </Form.Label>
-            <DatePicker 
+    <div className="form-group">
+          <label>Date: </label>
+          <div>
+            <DatePicker
               selected={this.state.date}
               onChange={this.onChangeDate}
             />
-            
-          </Form.Group>
+          </div>
+        </div>
 
-          <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-        </Form>
+    <div className="form-group">
+          <input type="submit" value="Create Blog" className="btn btn-primary" />
+        </div>
+  </form>
         )
     }
 }
