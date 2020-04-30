@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 
 const Blog = props =>(
@@ -7,7 +8,7 @@ const Blog = props =>(
   <h2 className="blog-post-title">{props.blog.title}</h2>
 <p className="blog-post-meta">{props.blog.date} by <a href="#">{props.blog.username}</a></p>
   <p>{props.blog.blog}</p>
-  <a href="/"><button onClick={() => { props.deleteBlog(props.blog._id) }}>delete</button></a>
+  <Link to={"/edit/"+props.blog._id} >Edit</Link><a href="/"><button onClick={() => { props.deleteBlog(props.blog._id) }}>delete</button></a>
 
   </div>
 )
