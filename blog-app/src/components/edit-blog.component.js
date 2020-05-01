@@ -16,10 +16,33 @@ class Edit extends Component {
         }
     }
     componentDidMount(){
-        axios.get('http://localhost:5000/blog/' + this.props.match.params.id)
+        axios.get('http://localhost:5000/user/' + this.props.match.params.id)
             .then(response => {
+                if(response.data.length > 0){
+                    this.setState({
+                        users: response.data.map(user => user.username),
+                    })
+                }
 
             })
+    }
+    handleInputChange= (e)=> {
+        const { name, value } = e.target
+        this.setState ({
+          [name]: value
+        });
+      }
+      onChangeUsername =(e)=> {
+        this.setState({
+          username: e.target.value
+        })
+      }
+    
+           
+        onChangeDate =(date)=> {
+        this.setState({
+        date: date
+        });
     }
     render() {
         return (
