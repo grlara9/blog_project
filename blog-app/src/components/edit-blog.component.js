@@ -4,28 +4,39 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 class Edit extends Component {
-    constructor(props){
-        super(props);
-
-        this.state = {
+  constructor(props){
+    super(props);
+      this.state = {
             title: '',
             blog: '',
             username: '',
             date: new Date,
             users: []
-        }
-    }
-    componentDidMount(){
-        axios.get('http://localhost:5000/user/' + this.props.match.params.id)
-            .then(response => {
-                if(response.data.length > 0){
-                    this.setState({
-                        users: response.data.map(user => user.username),
-                    })
-                }
+          }
+      }
+  componentDidMount(){
+    axios.get('http://localhost:5000/blog/'+this.props.match.params.id)
+    .then(response => {
+      this.setState({
+        title: response.data.title,
+        blog: response.data.blog,
+        
+        date: new Date(response.data.date)
+      })   
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
 
+    axios.get('http://localhost:5000/user/')
+      .then(response => {
+        if(response.data.length > 0){
+            this.setState({
+              users: response.data.map(user => user.username),
             })
-    }
+          }
+        })
+      }
     handleInputChange= (e)=> {
         const { name, value } = e.target
         this.setState ({
@@ -44,6 +55,22 @@ class Edit extends Component {
         date: date
         });
     }
+    onSubmit = (e) => {
+      e.preventDefault();
+  
+      const blog = {
+        title: this.state.title,
+        blog: this.state.blog,
+        username: this.state.username,
+        date: this.state.date
+      }
+  
+      axios.put('http://localhost:5000/blog/update/' + this.props.match.params.id, blog)
+        .then(res => console.log(res.data));
+  
+      
+    }
+
     render() {
         return (
             <form onClick={this.onSubmit}>
