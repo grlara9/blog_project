@@ -26,10 +26,11 @@ connection.once('open', ()=>{
  
 const blogController = require('./controllers/blog')
 const userController = require('./controllers/user')
+const userRegister = require('./controllers/register')
 
 app.use('/blog', blogController)
 app.use('/user', userController)
-
+app.use('/register', userRegiste)
 
 app.listen(PORT, ()=> {
     console.log("Listening on PORT: " + PORT)
