@@ -16,5 +16,5 @@
           type: String
       }
   })
-  const RegisterLogin = mongoose.model('Register', RegisterSchema);
-module.exports = RegisterLogin;
+  const User = mongoose.model('Register', RegisterSchema);
+module.exports = User;

@@ -10,9 +10,7 @@ router.get("/", (req, res) => {
 
 router.post("/add", (req, res)=>{
     
-    const title= req.body.title;
-    const blog=req.body.blog;
-    const username = req.body.username;
+    const { title, blog, username} = req.body
     const date = Date.parse(req.body.date)
 
     const newBlog = new BlogPost({
