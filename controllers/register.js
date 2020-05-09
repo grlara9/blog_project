@@ -46,15 +46,14 @@ router.post("/login", (req, res) =>{
       if(user){
         if(bcrypt.compare(password, user.password)){
 
-          const data = {
-            _id: user._id,
-            email: user.email,
+         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
 
-          }
-          let token = jwt.sign(data, process.env.JWT_SECRET,{
-            expiresIn: 1440
-          })
-          res.json(token)
+          res.json({token, 
+            user: {
+              id: user._id,
+              email: user.email
+            },
+            });
         }else{
           res.json({error: "User combination incorrect"})
         }
