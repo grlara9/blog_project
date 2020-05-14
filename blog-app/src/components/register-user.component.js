@@ -65,13 +65,25 @@ class Register extends Component{
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="confirmPass">Email address</label>
+                        <label htmlFor="confirmPass">Confirm Password</label>
                         <input
                           type="password"
                           className="form-control"
                           name="password"
                           placeholder="Confirm Password"
                           value={this.state.confirmPass}
+                          onChange={this.onChange}
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="confirmPass">Username</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="username"
+                          placeholder="Confirm Password"
+                          value={this.state.username}
                           onChange={this.onChange}
                         />
                       </div>
