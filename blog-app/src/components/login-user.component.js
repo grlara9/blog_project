@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 
-class Login extends Component {
-    constructor(){
+class Login extends React.Component {
+    constructor(props){
         super(props)
         this.state ={
             email: '',
@@ -17,25 +17,12 @@ class Login extends Component {
     }
 
     onSubmit = (e) => {
-        e.preventDefault()
-
-        const user = {
-            email: this.state.email,
-            password: this.state.password
-        }
-        axios.post('http://localhost:5000/authenticate/login', user)
-        .then(response => {
-        localStorage.setItem('usertoken', response.data)
-        if (response){
-            this.props.history.push('/')
-        }
-        })
-        .catch(err => {console.log(err)})
-}
-    
+       
 }
 
-render(){
+
+
+render() {
     return(
         <div className="container">
         <div className="row">
@@ -72,3 +59,5 @@ render(){
       </div>
     )
 }
+}
+export default Login
