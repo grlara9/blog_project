@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 class Navbar extends React.Component {
 
@@ -28,10 +28,23 @@ class Navbar extends React.Component {
     const userLink = (
       <ul className="navbar-nav">
         <li className="nav-item">
-          <Link to="/profile" className="nav-link">
-            User
+          <Link to="/main" className="nav-link">
+            All Blogs
           </Link>
         </li>
+        
+        <li className="nav-item">
+          <Link to="/blog" className="nav-link">
+            Create Blog
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link to="/user" className="nav-link">
+            Create user
+          </Link>
+        </li>
+
         <li className="nav-item">
           <a href="" onClick={this.logOut} className="nav-link">
             Logout
@@ -60,7 +73,7 @@ class Navbar extends React.Component {
         >
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link to="/" className="nav-link">
+              <Link to="/" className="nav-link"> 
                 Home
               </Link>
             </li>
@@ -73,4 +86,3 @@ class Navbar extends React.Component {
 }
 export default withRouter(Navbar)
 
-export default Navbar;

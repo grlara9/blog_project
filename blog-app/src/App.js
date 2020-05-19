@@ -20,7 +20,7 @@ function App() {
         <br/>
         <Switch>
           <Route path="/" exact component={Front} />
-          <Route path="/main" component={BlogList}
+          <Route path="/main" component={BlogList} />
           <Route path="/blog" component={CreateBlog} />
           <Route path="/user" component={CreateUser} />
           <Route path="/edit/:id" component={Edit} />
