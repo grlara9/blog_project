@@ -17,7 +17,18 @@ class Login extends React.Component {
     }
 
     onSubmit = (e) => {
-       
+       e.preventDefault();
+
+       const user = {
+         email: this.state.email,
+         password: this.state.password
+       }
+
+       axios.post('http://localhost:5000/authenticate/login', user)
+       .then(response => {
+         localStorage.setItem('usertoken', response.data)
+         this.props.history.push(`/main`)
+       })
 }
 
 
