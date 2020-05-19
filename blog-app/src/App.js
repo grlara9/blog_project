@@ -9,6 +9,7 @@ import CreateUser from './components/create-user.component'
 import Edit from './components/edit-blog.component'
 import Register from './components/register-user.component'
 import Login from './components/login-user.component'
+import Front from './components/front-page.component'
 import NoMatch from './components/no-match.component'
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
         <Navbar />
         <br/>
         <Switch>
-          <Route path="/" exact component={BlogList} />
+          <Route path="/" exact component={Front} />
+          <Route path="/main" component={BlogList}
           <Route path="/blog" component={CreateBlog} />
           <Route path="/user" component={CreateUser} />
           <Route path="/edit/:id" component={Edit} />
